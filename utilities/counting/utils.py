@@ -160,6 +160,10 @@ def save_tracking_to_csv(track_dict, filename):
         'color': [],
         'label': [],
         'direction': [],
+        'fpoint': [],
+        'lpoint': [],
+        'fframe': [],
+        'lframe': []
     }
 
     for label_id in range(num_classes):

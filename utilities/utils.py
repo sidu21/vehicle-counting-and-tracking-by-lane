@@ -9,7 +9,7 @@ import gdown
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from torch.nn.init import _calculate_fan_in_and_fan_out, _no_grad_normal_
-
+class_names = [ 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck']
 STANDARD_COLORS = [
     'LawnGreen', 'LightBlue' , 'Crimson', 'Gold', 'BlanchedAlmond', 'Bisque',
     'Aquamarine', 'BlueViolet', 'BurlyWood', 'CadetBlue', 'AntiqueWhite','Azure', 
@@ -70,7 +70,7 @@ def draw_boxes_v2(img_name, img, boxes, labels, scores, obj_list=None, figsize=(
         if obj_list is not None:
             text = '{}: {}'.format(obj_list[label], str(score))
         else:
-            text = '{}: {}'.format(label, str(score))
+            text = '{}: {}'.format(class_names[label], str(score))
         plt.text(x, y-3,text, color = color, fontsize=15)
         # Add the patch to the Axes
         ax.add_patch(rect)

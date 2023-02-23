@@ -50,11 +50,11 @@ class ImageDetect:
                 # Here, labels start from 1, subtract 1 
                 labels = outputs['classes']
                 scores = outputs['scores']
-
+                print(self.class_names(labels))
                 boxes_result.append(boxes)
                 labels_result.append(labels)
                 scores_result.append(scores)
-                print(outputs)
+                
         return {
             "boxes": boxes_result, 
             "labels": labels_result,

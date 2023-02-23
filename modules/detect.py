@@ -54,7 +54,7 @@ class ImageDetect:
                 boxes_result.append(boxes)
                 labels_result.append(labels)
                 scores_result.append(scores)
-
+                print(outputs)
         return {
             "boxes": boxes_result, 
             "labels": labels_result,

@@ -131,7 +131,7 @@ class VideoCounting:
                 )   
 
                 self.track_dict[label_id][track_id]['direction'] = direction
-        print(self.track_dict)
+        #print(self.track_dict)
         if output_path is not None:
             save_tracking_to_csv(self.track_dict, output_path)
 

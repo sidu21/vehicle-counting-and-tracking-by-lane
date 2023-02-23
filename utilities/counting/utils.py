@@ -153,6 +153,7 @@ def find_best_match_direction(obj_vector,paths):
 
 def save_tracking_to_csv(track_dict, filename):
     num_classes = len(track_dict)
+    class_names = [ 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck']
     obj_dict = {
         'track_id': [],
         'frame_id': [],
@@ -172,7 +173,7 @@ def save_tracking_to_csv(track_dict, filename):
             boxes = track_dict[label_id][track_id]['boxes']
             frames = track_dict[label_id][track_id]['frames']
             color = track_dict[label_id][track_id]['color']
-
+            name = classnames[label_id]
             frame_first = frames[0]
             frame_last = frames[-1]
 
@@ -187,6 +188,7 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['frame_id'].append(frames[i])
                 obj_dict['box'].append(boxes[i].tolist())
                 obj_dict['color'].append(color)
+                obj_dict['name'].append(name)
                 obj_dict['label'].append(label_id)
                 obj_dict['direction'].append(direction)
                 obj_dict['fpoint'].append(center_point_first)

@@ -160,6 +160,7 @@ def save_tracking_to_csv(track_dict, filename):
         'box': [],
         'color': [],
         'label': [],
+        'name':[],
         'direction': [],
         'fpoint': [],
         'lpoint': [],

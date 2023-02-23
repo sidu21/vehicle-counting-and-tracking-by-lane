@@ -173,7 +173,7 @@ def save_tracking_to_csv(track_dict, filename):
             boxes = track_dict[label_id][track_id]['boxes']
             frames = track_dict[label_id][track_id]['frames']
             color = track_dict[label_id][track_id]['color']
-            name = classnames[label_id]
+            name = class_names[label_id]
             frame_first = frames[0]
             frame_last = frames[-1]
 

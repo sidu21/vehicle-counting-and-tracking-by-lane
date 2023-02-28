@@ -175,18 +175,18 @@ def save_tracking_to_csv(track_dict, filename):
     for label_id in range(num_classes):
         for track_id in track_dict[label_id].keys():
             direction = track_dict[label_id][track_id]['direction']
-            #boxes = track_dict[label_id][track_id]['boxes']
+            boxes = track_dict[label_id][track_id]['boxes']
             frames = track_dict[label_id][track_id]['frames']
             #color = track_dict[label_id][track_id]['color']
             name = class_names[label_id]
-            frame_first = frames[0]
-            frame_last = frames[-1]
+            # frame_first = frames[0]
+            # frame_last = frames[-1]
 
-            box_first = boxes[0]
-            box_last = boxes[-1]
+            # box_first = boxes[0]
+            # box_last = boxes[-1]
 
-            center_point_first = ((box_first[2]+box_first[0]) / 2, (box_first[3] + box_first[1])/2)
-            center_point_last = ((box_last[2]+box_last[0]) / 2, (box_last[3] + box_last[1])/2)
+            # center_point_first = ((box_first[2]+box_first[0]) / 2, (box_first[3] + box_first[1])/2)
+            # center_point_last = ((box_last[2]+box_last[0]) / 2, (box_last[3] + box_last[1])/2)
 
             for i in range(len(track_dict[label_id][track_id]['boxes'])):              
                 obj_dict['track_id'].append(track_id)

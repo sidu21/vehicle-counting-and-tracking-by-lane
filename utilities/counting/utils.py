@@ -32,7 +32,7 @@ def draw_one_box(img, box, key=None, value=None, color=None, line_thickness=None
         c2 = c1[0] + t_size[0] + s_size[0] + 15, c1[1] - t_size[1] - 3
         img = cv2.rectangle(img, c1, c2, color, -1)  # filled
         img = cv2.putText(img, header, (c1[0], c1[1] - 2), 0, float(tl) / 3, [0, 0, 0],
-                    thickness=tf, lineType=cv2.FONT_HERSHEY_SIMPLEX)    
+                    thickness=tf, lineType=cv2.FONT_HERSHEY_DUPLEX)    
     return img
 
 def draw_text(
@@ -42,7 +42,7 @@ def draw_text(
     color=(255, 255, 255),
     fontScale=0.75,
     thickness=1,
-    fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+    fontFace=cv2.FONT_HERSHEY_DUPLEX,
     outline_color=(0, 0, 0),
     line_spacing=1.5,
 ):
@@ -115,13 +115,13 @@ def draw_anno(image, polygon=None, paths=None):
     if polygon:
         polygon = np.array(polygon, np.int32)
         polygon = polygon.reshape((-1, 1, 2))
-        image = cv2.polylines(image, [polygon], True, colors[0], 5)
+        image = cv2.polylines(image, [polygon], True, colors[4], 3)
     if paths:
         for path, points in paths.items():
             points = np.array(points, np.int32)
-            image = draw_arrow(image, points[0], points[1], colors[5])
+            image = draw_arrow(image, points[0], points[1], colors[1])
             image = cv2.putText(image, path, (points[1][0], points[1][1]), 
-                cv2.FONT_HERSHEY_PLAIN, fontScale=1.5, color=colors[5], thickness=3)
+                cv2.FONT_HERSHEY_PLAIN, fontScale=1.5, color=colors[1], thickness=2)
     return image
 
 def draw_frame_count(img, frame_id):
@@ -201,6 +201,7 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['fframe'].append(frame_first)
                 obj_dict['lframe'].append(frame_last)
 
+    print(track_dict[:15])
     df = pd.DataFrame(obj_dict)
     df.to_csv(filename, index=False)
 
@@ -255,7 +256,6 @@ def convert_frame_dict(track_dict):
     return result_dict
 
 def visualize_one_frame(img, df):
-    global class_names
     # track_id	frame_id	box	color	label	direction	fpoint	lpoint	fframe	lframe
     anns = [
         i for i in zip(
@@ -278,7 +278,6 @@ def visualize_one_frame(img, df):
                 key=f'id: {track_id}',
                 value=f'cls: {class_names[label]}',
                 color=color)
-        
     return img
 
 def count_frame_directions(df, count_dict):

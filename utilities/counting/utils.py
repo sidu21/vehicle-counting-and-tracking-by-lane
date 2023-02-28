@@ -119,9 +119,9 @@ def draw_anno(image, polygon=None, paths=None):
     if paths:
         for path, points in paths.items():
             points = np.array(points, np.int32)
-            image = draw_arrow(image, points[0], points[1], colors[1])
+            image = draw_arrow(image, points[0], points[1], colors[5])
             image = cv2.putText(image, path, (points[1][0], points[1][1]), 
-                cv2.FONT_HERSHEY_PLAIN, fontScale=1.5, color=colors[1], thickness=2)
+                cv2.FONT_HERSHEY_PLAIN, fontScale=1.5, color=colors[2], thickness=2)
     return image
 
 def draw_frame_count(img, frame_id):
@@ -296,7 +296,7 @@ def count_frame_directions(df, count_dict):
     for dir in count_dict.keys():
         tmp_text = f"direction:{dir} || "
         for cls_id in count_dict[dir].keys():
-            tmp_text += f"{cls_id}:{count_dict[dir][cls_id]} | "
+            tmp_text += f"{class_names[cls_id]}:{count_dict[dir][cls_id]} | "
         count_text.append(tmp_text)
     count_text = "\n".join(count_text)
 

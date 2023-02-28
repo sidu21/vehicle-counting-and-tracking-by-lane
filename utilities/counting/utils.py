@@ -156,20 +156,19 @@ def find_best_match_direction(obj_vector,paths):
     return best_match
 
 def save_tracking_to_csv(track_dict, filename):
-    global class_names
     num_classes = len(track_dict)
     obj_dict = {
         'track_id': [],
         'frame_id': [],
         'box': [],
-        # 'color': [],
+        'color': [],
         'label': [],
         'name':[],
         'direction': [],
-        # 'fpoint': [],
-        # 'lpoint': [],
-        # 'fframe': [],
-        # 'lframe': []
+        'fpoint': [],
+        'lpoint': [],
+        'fframe': [],
+        'lframe': []
     }
 
     for label_id in range(num_classes):

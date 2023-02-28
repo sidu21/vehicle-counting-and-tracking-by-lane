@@ -162,14 +162,14 @@ def save_tracking_to_csv(track_dict, filename):
         'track_id': [],
         'frame_id': [],
         'box': [],
-        'color': [],
+        # 'color': [],
         'label': [],
         'name':[],
         'direction': [],
-        'fpoint': [],
-        'lpoint': [],
-        'fframe': [],
-        'lframe': []
+        # 'fpoint': [],
+        # 'lpoint': [],
+        # 'fframe': [],
+        # 'lframe': []
     }
 
     for label_id in range(num_classes):

@@ -175,9 +175,9 @@ def save_tracking_to_csv(track_dict, filename):
     for label_id in range(num_classes):
         for track_id in track_dict[label_id].keys():
             direction = track_dict[label_id][track_id]['direction']
-            boxes = track_dict[label_id][track_id]['boxes']
+            #boxes = track_dict[label_id][track_id]['boxes']
             frames = track_dict[label_id][track_id]['frames']
-            color = track_dict[label_id][track_id]['color']
+            #color = track_dict[label_id][track_id]['color']
             name = class_names[label_id]
             frame_first = frames[0]
             frame_last = frames[-1]
@@ -191,17 +191,16 @@ def save_tracking_to_csv(track_dict, filename):
             for i in range(len(track_dict[label_id][track_id]['boxes'])):              
                 obj_dict['track_id'].append(track_id)
                 obj_dict['frame_id'].append(frames[i])
-                obj_dict['box'].append(boxes[i].tolist())
-                obj_dict['color'].append(color)
+                #obj_dict['box'].append(boxes[i].tolist())
+                #obj_dict['color'].append(color)
                 obj_dict['name'].append(name)
                 obj_dict['label'].append(label_id)
                 obj_dict['direction'].append(direction)
-                obj_dict['fpoint'].append(center_point_first)
-                obj_dict['lpoint'].append(center_point_last)
-                obj_dict['fframe'].append(frame_first)
-                obj_dict['lframe'].append(frame_last)
+                # obj_dict['fpoint'].append(center_point_first)
+                # obj_dict['lpoint'].append(center_point_last)
+                # obj_dict['fframe'].append(frame_first)
+                # obj_dict['lframe'].append(frame_last)
 
-    print(track_dict[:15])
     df = pd.DataFrame(obj_dict)
     df.to_csv(filename, index=False)
 

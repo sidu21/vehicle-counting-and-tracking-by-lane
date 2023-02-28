@@ -4,6 +4,10 @@ from tqdm import tqdm
 import pandas as pd
 from .bb_polygon import *
 
+
+class_names = [ 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck','boat', 'traffic light','fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
+global class_names
+
 def draw_arrow(image, start_point, end_point, color):
     start_point = tuple(start_point)
     end_point = tuple(end_point)
@@ -152,8 +156,8 @@ def find_best_match_direction(obj_vector,paths):
     return best_match
 
 def save_tracking_to_csv(track_dict, filename):
+    global class_names
     num_classes = len(track_dict)
-    class_names = [ 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck','boat', 'traffic light','fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
     obj_dict = {
         'track_id': [],
         'frame_id': [],
@@ -251,6 +255,7 @@ def convert_frame_dict(track_dict):
     return result_dict
 
 def visualize_one_frame(img, df):
+    global class_names
     # track_id	frame_id	box	color	label	direction	fpoint	lpoint	fframe	lframe
     anns = [
         i for i in zip(
@@ -271,7 +276,7 @@ def visualize_one_frame(img, df):
                 img, 
                 box, 
                 key=f'id: {track_id}',
-                value=f'cls: {label}',
+                value=f'cls: {class_names[label]}',
                 color=color)
         
     return img

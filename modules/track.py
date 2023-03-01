@@ -135,4 +135,6 @@ class VideoCounting:
         if output_path is not None:
             save_tracking_to_csv(self.track_dict, output_path)
 
+            
+
         return self.track_dict

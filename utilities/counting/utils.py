@@ -309,9 +309,13 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
         } for dir in directions
     }
 
-    print(count_dict)
-
-
+    count_dict_new = {
+        f"direction_{dir}": {
+            class_names[label]: 0 for label in range(num_classes) 
+        } for dir in directions
+    }
+    count_dict_new = pd.DataFrame(data=count_dict_new)
+    print(count_dict_new)
     prev_text = None # Delay direction text by one frame
     for batch in tqdm(videoloader):
         if batch is None:

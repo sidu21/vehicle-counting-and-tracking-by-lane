@@ -210,7 +210,7 @@ def save_tracking_to_csv(track_dict, filename):
     # }
     
     
-    count = df.groupby(['track_id']['name'])['name'].count()
+    count = df.groupby(['track_id'],['name'])['name'].count()
     print(count)
 
     # count_csv = pd.DataFrame(

@@ -201,6 +201,27 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['lframe'].append(frame_last)
 
     df = pd.DataFrame(obj_dict)
+    
+    #class_list = df['name'].unique().tolist()
+    # count_dict_new = {
+    #     f"direction_{dir}": {
+    #         class_names[label]: 0 for label in range(num_classes) 
+    #     } for dir in directions
+    # }
+    
+    
+    count = df.groupby(['track_id'])['name'].count()
+    print(count)
+
+    # count_csv = pd.DataFrame(
+    #     {
+    #         f"direction_{dir}": {
+    #             class_name: count[class_name]+1 if class_name== for class_name in class_list
+    #         }
+    #     }
+    # )
+
+
     df.to_csv(filename, index=False)
 
 
@@ -309,13 +330,12 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
         } for dir in directions
     }
 
-    count_dict_new = {
-        f"direction_{dir}": {
-            class_names[label]: 0 for label in range(num_classes) 
-        } for dir in directions
-    }
-    count_dict_new = pd.DataFrame(data=count_dict_new)
-    print(count_dict_new)
+    # count_dict_new = {
+    #     f"direction_{dir}": {
+    #         class_names[label]: 0 for label in range(num_classes) 
+    #     } for dir in directions
+    # }
+    
     prev_text = None # Delay direction text by one frame
     for batch in tqdm(videoloader):
         if batch is None:

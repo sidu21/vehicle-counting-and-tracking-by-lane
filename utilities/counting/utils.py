@@ -309,7 +309,8 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
         } for dir in directions
     }
 
-    
+    print(count_dict)
+
 
     prev_text = None # Delay direction text by one frame
     for batch in tqdm(videoloader):

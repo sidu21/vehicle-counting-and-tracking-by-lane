@@ -330,7 +330,7 @@ def count_csv(df,count_dict_new):
 
     for (frame_id, name, direction, lframe) in anns:
         if lframe == frame_id:
-            count_dict_new[direction][name] += 1  
+            count_dict_new[f"direction_{direction}"][name] += 1  
     return count_dict_new
 
 def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outvid):

@@ -209,9 +209,7 @@ def save_tracking_to_csv(track_dict, filename):
     #     } for dir in directions
     # }
     
-    
-    count = df.groupby(['track_id'],['name'])['name'].count()
-    print(count)
+
 
     # count_csv = pd.DataFrame(
     #     {
@@ -303,7 +301,7 @@ def count_frame_directions(df, count_dict):
     anns = [
         i for i in zip(
             df.frame_id,
-            df.label, 
+            df.label,
             df.direction,  
             df.lframe)
     ]
@@ -319,8 +317,21 @@ def count_frame_directions(df, count_dict):
             tmp_text += f"{class_names[cls_id]}:{count_dict[dir][cls_id]} | "
         count_text.append(tmp_text)
     count_text = "\n".join(count_text)
-
     return count_dict, count_text
+
+def count_csv(df,count_dict_new):
+    anns = [
+        i for i in zip(
+            df.frame_id,
+            df.name,
+            df.direction,  
+            df.lframe)
+    ]
+
+    for (frame_id, name, direction, lframe) in anns:
+        if lframe == frame_id:
+            count_dict_new[direction][name] += 1  
+    return count_dict_new
 
 def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outvid):
     df = pd.read_csv(csv_path)
@@ -330,11 +341,11 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
         } for dir in directions
     }
 
-    # count_dict_new = {
-    #     f"direction_{dir}": {
-    #         class_names[label]: 0 for label in range(num_classes) 
-    #     } for dir in directions
-    # }
+    count_dict_new = {
+        f"direction_{dir}": {
+            class_names[label]: 0 for label in range(class_names) 
+        } for dir in directions
+    }
     
     prev_text = None # Delay direction text by one frame
     for batch in tqdm(videoloader):
@@ -349,7 +360,7 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
 
             tmp_df = df[df.frame_id.astype(int) == frame_id]
             count_dict, text = count_frame_directions(tmp_df, count_dict)
-
+            count_dict_new = count_csv(count_dict_new)
             img = draw_anno(img, zones, directions)
 
             if len(tmp_df) > 0:
@@ -361,3 +372,7 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
         
             img = draw_frame_count(img, frame_id)
             outvid.write(img)
+    
+
+    count_df = pd.DataFrame(count_csv)
+    print(count_df)

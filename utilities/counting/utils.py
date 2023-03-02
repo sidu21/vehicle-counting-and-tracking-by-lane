@@ -360,7 +360,7 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
 
             tmp_df = df[df.frame_id.astype(int) == frame_id]
             count_dict, text = count_frame_directions(tmp_df, count_dict)
-            count_dict_new = count_csv(count_dict_new)
+            count_dict_new = count_csv(tmp_df,count_dict_new)
             img = draw_anno(img, zones, directions)
 
             if len(tmp_df) > 0:

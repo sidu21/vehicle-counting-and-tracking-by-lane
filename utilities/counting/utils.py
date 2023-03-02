@@ -3,6 +3,7 @@ import json
 from tqdm import tqdm
 import pandas as pd
 from .bb_polygon import *
+import os
 
 global class_names
 class_names = [ 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck','boat', 'traffic light','fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
@@ -372,8 +373,8 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
         
             img = draw_frame_count(img, frame_id)
             outvid.write(img)
-    
 
-    count_df = pd.DataFrame(count_dict_new)
-    count_df.to_csv((filename.rstrip(".csv")+"_count.csv"), index=False)
-    print(count_df)
+counting_path = os.join(os.getcwd(),"count.csv")
+count_df = pd.DataFrame(count_dict_new)
+count_df.to_csv(counting_path, index=False)
+print(count_df)

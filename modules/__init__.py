@@ -4,6 +4,9 @@ from .detect import ImageDetect
 from .track import VideoTracker, VideoCounting
 from .datasets import VideoWriter, VideoLoader
 
+global counting_path
+counting_path = ""
+
 class CountingPipeline:
     def __init__(self, args, config, cam_config):
         self.detector = ImageDetect(args, config)
@@ -99,3 +102,5 @@ class CountingPipeline:
                 csv_path=os.path.join(self.saved_path, cam_name+'.csv'),
                 paths=videocounter.directions,
                 polygons=videocounter.polygons)
+            
+            #counting_path = os.path.join(self.saved_path, cam_name+'_count.csv')

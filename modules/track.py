@@ -79,6 +79,7 @@ class VideoCounting:
         self.polygons, self.directions = load_zone_anno(zone_path)
     
     def run(self, frames, tracks, labels, boxes, output_path=None):
+        
         from utilities.utils import color_list
         """
         obj id must starts from 0

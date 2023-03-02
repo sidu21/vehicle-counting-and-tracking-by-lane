@@ -380,6 +380,8 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
     count_df = pd.DataFrame(count_dict_new)
     count_df.index = count_df.index.str.title()
     count_df.columns = count_df.columns.str.title()
+    #count_df = count_df.dropna(how='all', inplace=True)
+    count_df = count_df[(df != 0).all(1)]
     count_df.to_csv(counting_path, index=True)
 
     print(count_df)

@@ -374,7 +374,7 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
             img = draw_frame_count(img, frame_id)
             outvid.write(img)
 
-counting_path = os.join(os.getcwd(),"count.csv")
+counting_path = os.path.join(os.getcwd(),"count.csv")
 count_df = pd.DataFrame(count_dict_new)
 count_df.to_csv(counting_path, index=False)
 print(count_df)

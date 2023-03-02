@@ -375,4 +375,5 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
     
 
     count_df = pd.DataFrame(count_dict_new)
+    count_df.to_csv((filename.rstrip(".csv")+"_count.csv"), index=False)
     print(count_df)

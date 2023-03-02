@@ -341,7 +341,7 @@ def visualize_merged(videoloader, csv_path, directions, zones, num_classes, outv
             label: 0 for label in range(num_classes)
         } for dir in directions
     }
-
+    global count_dict_new
     count_dict_new = {
         f"direction_{int(dir)}": {
             class_names[label]: 0 for label in range(len(class_names)) 

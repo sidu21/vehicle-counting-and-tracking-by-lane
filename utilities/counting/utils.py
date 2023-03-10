@@ -334,7 +334,7 @@ def count_frame_directions(df, count_dict):
     for dir in count_dict.keys():
         tmp_text = f"direction:{dir} || "
         for cls_id in count_dict[dir].keys():
-            tmp_text += f"{class_names[cls_id-1]}:{count_dict[dir][cls_id]} | "
+            tmp_text += f"{class_names[cls_id]}:{count_dict[dir][cls_id]} | "
         count_text.append(tmp_text)
     count_text = "\n".join(count_text)
     return count_dict, count_text

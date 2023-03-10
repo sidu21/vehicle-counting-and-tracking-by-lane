@@ -8,8 +8,25 @@ from tqdm import tqdm
 from .bb_polygon import *
 
 global class_names
-class_names = [ 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck','boat', 'traffic light','fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
+class_names = {
+                "bicycle": 0,
+                "bus": 1,
+                "traffic sign": 2,
+                "train": 3,
+                "motorcycle": 4,
+                "car":5,
+                "traffic light": 6,
+                "person": 7,
+                "vehicle fallback" : 8,
+                "truck": 9,
+                "autorickshaw": 10,
+                "animal": 11,
+                "caravan": 12,
+                "rider": 13,
+                "trailer" : 14
+}
 
+class_names = list(class_names_dict.keys())
 
 def draw_arrow(image, start_point, end_point, color):
     start_point = tuple(start_point)
@@ -317,7 +334,7 @@ def count_frame_directions(df, count_dict):
     for dir in count_dict.keys():
         tmp_text = f"direction:{dir} || "
         for cls_id in count_dict[dir].keys():
-            tmp_text += f"{class_names[cls_id]}:{count_dict[dir][cls_id]} | "
+            tmp_text += f"{class_names[cls_id-1]}:{count_dict[dir][cls_id]} | "
         count_text.append(tmp_text)
     count_text = "\n".join(count_text)
     return count_dict, count_text

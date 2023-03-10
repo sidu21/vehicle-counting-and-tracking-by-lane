@@ -60,7 +60,7 @@ def draw_text(
     text,
     uv_top_left=None,
     color=(255, 255, 255),
-    fontScale=0.s5,
+    fontScale=0.5,
     thickness=1,
     fontFace=cv2.FONT_HERSHEY_DUPLEX,
     outline_color=(0, 0, 0),

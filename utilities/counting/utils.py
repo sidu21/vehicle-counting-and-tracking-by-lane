@@ -8,7 +8,7 @@ from tqdm import tqdm
 from .bb_polygon import *
 
 global class_names
-class_names = {
+class_names_dict = {
                 "bicycle": 0,
                 "bus": 1,
                 "traffic sign": 2,

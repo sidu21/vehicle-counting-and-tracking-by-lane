@@ -217,7 +217,8 @@ def save_tracking_to_csv(track_dict, filename):
             end = frame_last/fps
 
             for i in range(len(track_dict[label_id][track_id]['boxes'])):              
-                if [track_id, label_id] in [[obj_dict['track_id'], obj_dict['label_id']] for i in range(len(obj_dict['track_id']))] :
+                
+                if [track_id, label_id] in [[obj_dict['track_id'], obj_dict['label']] for i in range(len(obj_dict['track_id']))] :
                     continue
 
                 obj_dict['track_id'].append(track_id)

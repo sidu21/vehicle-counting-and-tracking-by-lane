@@ -1,6 +1,6 @@
 import json
 import os
-
+import datetime
 import cv2
 import pandas as pd
 from tqdm import tqdm
@@ -193,6 +193,16 @@ def save_tracking_to_csv(track_dict, filename):
         'end' : []
     }
     
+    obj_dict2= {
+        'track_id': [],
+        'label': [],
+        'name':[],
+        'direction': [],
+        'start' : [],
+        'end' : [],
+        'frame_id': []        
+    }
+
     #existing_label_ids = {label_id: set() for label_id in range(num_classes)}
 
     for label_id in range(num_classes):
@@ -213,13 +223,10 @@ def save_tracking_to_csv(track_dict, filename):
             center_point_last = ((box_last[2]+box_last[0]) / 2, (box_last[3] + box_last[1])/2)
 
             fps = 14
-            start = frame_first/fps
-            end = frame_last/fps
+            start = str(datetime.timedelta(seconds = (frame_first/fps)))
+            end = str(datetime.timedelta(seconds = (frame_last/fps)))
 
             for i in range(len(track_dict[label_id][track_id]['boxes'])):              
-                
-                if [track_id, label_id] in [[obj_dict['track_id'][i], obj_dict['label'][i]] for i in range(len(obj_dict['track_id']))] :
-                    continue
 
                 obj_dict['track_id'].append(track_id)
                 obj_dict['frame_id'].append(frames[i])
@@ -234,9 +241,20 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['lframe'].append(frame_last)
                 obj_dict['start'].append(start)
                 obj_dict['end'].append(end)
+                
+                if [track_id, label_id] in [[obj_dict['track_id'][i], obj_dict['label'][i]] for i in range(len(obj_dict['track_id']))] :
+                    continue
+
+                obj_dict2['track_id'].append(track_id)
+                obj_dict2['frame_id'].append(frames)
+                obj_dict2['name'].append(name)
+                obj_dict2['label'].append(label_id)
+                obj_dict2['direction'].append(direction)
+                obj_dict2['start'].append(start)
+                obj_dict2['end'].append(end)
 
     df = pd.DataFrame(obj_dict)
-    df0 = df.drop(['box','color','fpoint','lpoint','fframe','lframe'],axis=1 )
+    df0 = pd.DataFrame(obj_dict2) #df.drop(['box','color','fpoint','lpoint','fframe','lframe'],axis=1 )
     #class_list = df['name'].unique().tolist()
     # count_dict_new = {
     #     f"direction_{dir}": {

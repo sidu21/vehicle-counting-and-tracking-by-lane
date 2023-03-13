@@ -195,7 +195,7 @@ def save_tracking_to_csv(track_dict, filename):
     
     obj_dict2= {
         'Track_id': [],
-        #'Label_id': [],
+        'Label_id': [],
         'Vehicle_class':[],
         'Direction': [],
         'Entry time' : [],
@@ -242,13 +242,13 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['Entry'].append(start)
                 obj_dict['Exit'].append(end)
                 
-                if [track_id, label_id] in [[obj_dict2['track_id'][i], obj_dict2['label'][i]] for i in range(len(obj_dict2['track_id']))] :
+                if [track_id, label_id] in [[obj_dict2['Track_id'][i], obj_dict2['Label_id'][i]] for i in range(len(obj_dict2['Track_id']))] :
                     continue
 
                 obj_dict2['Track_id'].append(track_id)
                 #obj_dict2['Frame_id'].append(frames)
                 obj_dict2['Vehicle_class'].append(name)
-                #obj_dict2['label'].append(label_id)
+                obj_dict2['Label_id'].append(label_id)
                 obj_dict2['Direction'].append(direction)
                 obj_dict2['Entry time'].append(start)
                 obj_dict2['Exit time'].append(end)

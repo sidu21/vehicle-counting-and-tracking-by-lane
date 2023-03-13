@@ -2,6 +2,16 @@ settings:
   zone_path: "./demo/sample"
   checkpoint: "./networks/deepsort/deep/checkpoint/ckpt.t7"
   cam:
+    cam_04:
+      tracking_config:
+        MAX_DIST: 0.2
+        MIN_CONFIDENCE: 0.25
+        NMS_MAX_OVERLAP: 0.5
+        MAX_IOU_DISTANCE: 0.6
+        MAX_AGE: 30
+        N_INIT: 3
+        NN_BUDGET: 60
+
     hvi00047:
       tracking_config:
         MAX_DIST: 0.2

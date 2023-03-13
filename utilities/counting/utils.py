@@ -190,9 +190,16 @@ def save_tracking_to_csv(track_dict, filename):
         'fframe': [],
         'lframe': []
     }
+    
+    existing_track_ids = {label_id: set() for label_id in range(num_classes)}
 
     for label_id in range(num_classes):
         for track_id in track_dict[label_id].keys():
+            if track_id in existing_track_ids[label_id]:
+                continue
+            
+            existing_track_ids[label_id].add(track_id)            
+
             direction = track_dict[label_id][track_id]['direction']
             boxes = track_dict[label_id][track_id]['boxes']
             frames = track_dict[label_id][track_id]['frames']

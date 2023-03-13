@@ -242,7 +242,7 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['start'].append(start)
                 obj_dict['end'].append(end)
                 
-                if [track_id, label_id] in [[obj_dict['track_id'][i], obj_dict['label'][i]] for i in range(len(obj_dict['track_id']))] :
+                if [track_id, label_id] in [[obj_dict2['track_id'][i], obj_dict2['label'][i]] for i in range(len(obj_dict2['track_id']))] :
                     continue
 
                 obj_dict2['track_id'].append(track_id)

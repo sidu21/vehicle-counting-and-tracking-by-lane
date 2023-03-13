@@ -188,16 +188,15 @@ def save_tracking_to_csv(track_dict, filename):
         'fpoint': [],
         'lpoint': [],
         'fframe': [],
-        'lframe': []
+        'lframe': [],
+        'start' : [],
+        'end' : []
     }
     
     #existing_label_ids = {label_id: set() for label_id in range(num_classes)}
 
     for label_id in range(num_classes):
-        for track_id in track_dict[label_id].keys():
-            
-            if [track_id, label_id]  in [[obj_dict['track_id'], obj_dict['label_id']] for i in range(len(obj_dict['track_id']))] :
-                continue            
+        for track_id in track_dict[label_id].keys():            
             
             direction = track_dict[label_id][track_id]['direction']
             boxes = track_dict[label_id][track_id]['boxes']
@@ -213,7 +212,14 @@ def save_tracking_to_csv(track_dict, filename):
             center_point_first = ((box_first[2]+box_first[0]) / 2, (box_first[3] + box_first[1])/2)
             center_point_last = ((box_last[2]+box_last[0]) / 2, (box_last[3] + box_last[1])/2)
 
+            fps = 14
+            start = frame_first/fps
+            end = frame_last/fps
+
             for i in range(len(track_dict[label_id][track_id]['boxes'])):              
+                if [track_id, label_id]  not in [[obj_dict['track_id'], obj_dict['label_id']] for i in range(len(obj_dict['track_id']))] :
+                    continue
+
                 obj_dict['track_id'].append(track_id)
                 obj_dict['frame_id'].append(frames[i])
                 obj_dict['box'].append(boxes[i].tolist())
@@ -225,9 +231,11 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['lpoint'].append(center_point_last)
                 obj_dict['fframe'].append(frame_first)
                 obj_dict['lframe'].append(frame_last)
+                obj_dict['start'].append(start)
+                obj_dict['end'].append(end)
 
-    df = pd.DataFrame(obj_dict)
-    
+    df0 = pd.DataFrame(obj_dict)
+    df = df0.drop(['box','color','fpoint','lpoint','fframe','lframe'],axis=1 )
     #class_list = df['name'].unique().tolist()
     # count_dict_new = {
     #     f"direction_{dir}": {

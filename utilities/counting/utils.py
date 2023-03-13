@@ -254,7 +254,8 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict2['Exit time'].append(end)
 
     df = pd.DataFrame(obj_dict)
-    df0 = pd.DataFrame(obj_dict2) #df.drop(['box','color','fpoint','lpoint','fframe','lframe'],axis=1 )
+    df0 = pd.DataFrame(obj_dict2) 
+    df0 = df0.drop('Label_id',axis=1 )
     #class_list = df['name'].unique().tolist()
     # count_dict_new = {
     #     f"direction_{dir}": {

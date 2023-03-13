@@ -4,9 +4,9 @@ settings:
   model_name: 'yolov5s' #[efficientdet-d{i} (0-7) | fasterrcnn-{backbone} | yolov4-p{i} (5,7) | yolov5{i} (s,m,l,x)]
 
   gpu_devices: '0'                     # supports multi-gpus
-  num_epochs: 300
-  batch_size: 16
-  num_workers: 2
+  num_epochs: 10
+  batch_size: 32
+  num_workers: 24
 
   min_iou:  0.45                     # IOU threshold for validation
   min_conf: 0.25                    # Confidence score threshold for validation

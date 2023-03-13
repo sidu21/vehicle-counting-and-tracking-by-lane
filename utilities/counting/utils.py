@@ -234,8 +234,8 @@ def save_tracking_to_csv(track_dict, filename):
                 obj_dict['start'].append(start)
                 obj_dict['end'].append(end)
 
-    df0 = pd.DataFrame(obj_dict)
-    df = df0.drop(['box','color','fpoint','lpoint','fframe','lframe'],axis=1 )
+    df = pd.DataFrame(obj_dict)
+    df0 = df.drop(['box','color','fpoint','lpoint','fframe','lframe'],axis=1 )
     #class_list = df['name'].unique().tolist()
     # count_dict_new = {
     #     f"direction_{dir}": {
@@ -254,7 +254,7 @@ def save_tracking_to_csv(track_dict, filename):
     # )
 
 
-    df.to_csv(filename, index=False)
+    df0.to_csv(filename, index=False)
 
 
 def convert_frame_dict(track_dict):

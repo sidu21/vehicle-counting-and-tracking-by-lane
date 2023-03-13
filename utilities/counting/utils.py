@@ -254,8 +254,8 @@ def save_tracking_to_csv(track_dict, filename):
     # )
 
 
-    df0.to_csv(filename, index=False)
-
+    df.to_csv(filename, index=False)
+    df0.to_csv(filename.replace('.csv', '_result.csv'), index=False)
 
 def convert_frame_dict(track_dict):
     """
